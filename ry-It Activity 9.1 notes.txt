@@ -1,0 +1,31 @@
+For this exercise, I created Pipeline(s) for each of the three models. The first step for each of these is the StandardScaler to scale the data to unit variance.
+
+-- Ridge
+
+Pipeline: StandardScaler, Ridge
+
+I used GridSearchCV to determine the best alpha to use for Ridge (trying values 10^-5 to 10^5). This yielded an optimal alpha of 93.26033468832199.
+
+I created a Pipeline as described above, applying the optimal alpha.
+After fitting (X_train, y_train) the pipeline, I fan the .score(X_test, y_test) which yielded 
+
+0.36945719317099124.
+
+-- SequentialFeatureSelector
+
+I started by instantiating a SequentialFeatureSelector object using the Lasso linear model as the 'estimator' with a random_state=42. After fitting X_train & y_train, I called get_support() to view which 4 features were selected.
+
+Like with the Ridge exercise, I created a Pipeline
+StandardScaler, SequentialFeatureSelector(Lasso), LinearRegression.
+I then instantiated GridSearchCV passing in 'selector__n_features_to_select': [4].
+
+After fitting this model, I scored it to yield
+
+0.18824067748567763
+
+-- RFE (recursive feature elimination)
+
+I followed the same sequence as in the SequentialFeatureSelector exercise.
+The created GridSearchCV was fit(ed) and scored to yield
+
+0.2837474634809094
